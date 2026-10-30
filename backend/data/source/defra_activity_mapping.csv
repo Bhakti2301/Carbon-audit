@@ -1,0 +1,9 @@
+factor_id,geography,industry_id,process_id,activity_id,mapping_note
+1_102_1025_15_1,UK,steel_manufacturing,melting,coal_coke_consumption,Industrial coal measured in tonnes
+1_101_1011_8_1,UK,logistics_freight,road_freight,diesel_consumption,Diesel average biofuel blend measured in litres
+1_101_1012_8_1,UK,logistics_freight,road_freight,diesel_consumption,Diesel 100 percent mineral measured in litres
+1_100_1004_1_1,UK,commercial_buildings,space_heating,natural_gas_consumption,Natural gas measured in cubic metres
+7_400_4000_5_1,UK,commercial_buildings,building_electricity,electricity_consumption,UK grid electricity measured in kWh
+7_400_4000_5_1,UK,steel_manufacturing,melting,electricity_consumption,UK grid electricity for melting operations measured in kWh
+1_100_1004_1_1,UK,power_generation,fuel_combustion,natural_gas_consumption,Natural gas combustion measured in cubic metres
+1_101_1011_8_1,UK,power_generation,fuel_combustion,diesel_consumption,Diesel average biofuel blend measured in litres
