@@ -56,26 +56,38 @@ MAPPING_REVIEWER_ID = os.environ.get(
 ).strip()
 
 
+
 # ============================================================
 # 2. FIREBASE / FIRESTORE
 # ============================================================
 
-SERVICE_ACCOUNT_PATH = os.path.join(
+LOCAL_SERVICE_ACCOUNT_PATH = os.path.join(
     BASE_DIR,
     "carbon-audit-service-account.json"
 )
 
+RENDER_SECRET_PATH = "/etc/secrets/firebase-service-account.json"
+
+# Prefer an explicitly configured path, then Render's secret,
+# then the existing local development file.
+SERVICE_ACCOUNT_PATH = os.environ.get("FIREBASE_SERVICE_ACCOUNT_PATH")
+
+if not SERVICE_ACCOUNT_PATH:
+    if os.path.isfile(RENDER_SECRET_PATH):
+        SERVICE_ACCOUNT_PATH = RENDER_SECRET_PATH
+    else:
+        SERVICE_ACCOUNT_PATH = LOCAL_SERVICE_ACCOUNT_PATH
+
 if not firebase_admin._apps:
     if os.path.isfile(SERVICE_ACCOUNT_PATH):
-        # Local development: use the ignored service-account JSON file.
         credentials_object = credentials.Certificate(SERVICE_ACCOUNT_PATH)
         firebase_admin.initialize_app(credentials_object)
     else:
-        # Cloud Run: use Application Default Credentials from the service
-        # identity attached to the service; do not ship a JSON key.
+        # Use Application Default Credentials where available.
         firebase_admin.initialize_app()
 
 db = firestore.client()
+
 
 
 # ============================================================
